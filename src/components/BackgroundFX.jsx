@@ -32,10 +32,20 @@ export default function BackgroundFX() {
       {/* dotted grid */}
       <div className="absolute inset-0 grid-bg opacity-70" />
 
-      {/* aurora blobs */}
-      <div className="absolute -left-40 -top-40 h-[42rem] w-[42rem] rounded-full bg-sky-500/20 blur-[140px]" />
-      <div className="absolute -right-40 top-1/3 h-[36rem] w-[36rem] rounded-full bg-violet-500/20 blur-[150px]" />
-      <div className="absolute bottom-0 left-1/3 h-[32rem] w-[32rem] rounded-full bg-cyan-400/10 blur-[150px]" />
+      {/* aurora glows: radial gradients instead of huge blur() filters.
+          Same soft look, but no costly blur compositing (smooth on mobile/iOS). */}
+      <div
+        className="absolute -left-40 -top-40 h-[42rem] w-[42rem] rounded-full"
+        style={{ background: 'radial-gradient(circle, rgba(56,189,248,0.20), transparent 70%)' }}
+      />
+      <div
+        className="absolute -right-40 top-1/3 h-[36rem] w-[36rem] rounded-full"
+        style={{ background: 'radial-gradient(circle, rgba(129,140,248,0.20), transparent 70%)' }}
+      />
+      <div
+        className="absolute bottom-0 left-1/3 h-[32rem] w-[32rem] rounded-full"
+        style={{ background: 'radial-gradient(circle, rgba(34,211,238,0.12), transparent 70%)' }}
+      />
 
       {/* cursor-following spotlight */}
       <div className="absolute inset-0 spotlight" />
