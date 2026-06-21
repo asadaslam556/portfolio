@@ -205,8 +205,8 @@ function Particles({ count = 160, glowTex }) {
 }
 
 // ---- scene with pointer-reactive rotation --------------------------------
-function Scene({ reducedMotion }) {
-  const { nodes, edges } = useMemo(() => buildGraph(46, 2.6), [])
+function Scene({ reducedMotion, isMobile }) {
+  const { nodes, edges } = useMemo(() => buildGraph(isMobile ? 30 : 46, 2.6), [isMobile])
   const glowTex = useMemo(() => makeGlowTexture(), [])
   const root = useRef()
   const pointer = useRef({ x: 0, y: 0 })
@@ -241,7 +241,7 @@ function Scene({ reducedMotion }) {
       <group ref={root}>
         <Edges nodes={nodes} edges={edges} />
         <Nodes nodes={nodes} glowTex={glowTex} />
-        <Particles glowTex={glowTex} />
+        <Particles glowTex={glowTex} count={isMobile ? 70 : 160} />
       </group>
     </>
   )
@@ -250,6 +250,15 @@ function Scene({ reducedMotion }) {
 export default function KnowledgeGraph({ reducedMotion = false }) {
   const wrapRef = useRef(null)
   const [active, setActive] = useState(true)
+
+  // Phones get a lighter canvas (lower pixel density, no MSAA, fewer points)
+  // so the GPU is not saturated. Visually the same on a small screen.
+  const isMobile = useMemo(
+    () =>
+      typeof window !== 'undefined' &&
+      window.matchMedia('(max-width: 768px), (pointer: coarse)').matches,
+    []
+  )
 
   // Pause the render loop whenever the hero scrolls out of view, so the 3D
   // scene never burns GPU/battery while the visitor reads other sections.
@@ -268,11 +277,11 @@ export default function KnowledgeGraph({ reducedMotion = false }) {
     <div ref={wrapRef} className="h-full w-full">
       <Canvas
         camera={{ position: [0, 0, 7.5], fov: 45 }}
-        dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+        dpr={isMobile ? [1, 1.5] : [1, 2]}
+        gl={{ antialias: !isMobile, alpha: true, powerPreference: 'high-performance' }}
         frameloop={!reducedMotion && active ? 'always' : 'demand'}
       >
-        <Scene reducedMotion={reducedMotion} />
+        <Scene reducedMotion={reducedMotion} isMobile={isMobile} />
       </Canvas>
     </div>
   )

@@ -1,8 +1,12 @@
+import { lazy, Suspense } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import KnowledgeGraph from '../three/KnowledgeGraph'
 import MagneticButton from './MagneticButton'
 import Icon from './Icons'
 import { profile } from '../data/content'
+
+// Heavy 3D scene (three.js) is code-split so page content paints first,
+// then the canvas streams in. Keeps mobile from stalling on first load.
+const KnowledgeGraph = lazy(() => import('../three/KnowledgeGraph'))
 
 const container = {
   hidden: {},
@@ -20,7 +24,11 @@ export default function Hero({ ready }) {
     <section id="home" className="relative flex min-h-[100svh] items-center overflow-hidden">
       {/* 3D layer */}
       <div className="absolute inset-0">
-        {ready && <KnowledgeGraph reducedMotion={!!reduced} />}
+        {ready && (
+          <Suspense fallback={null}>
+            <KnowledgeGraph reducedMotion={!!reduced} />
+          </Suspense>
+        )}
         {/* fade the canvas into the page at the bottom */}
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-void to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-void/80 via-void/30 to-transparent" />
