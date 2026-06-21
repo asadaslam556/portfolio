@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --mx: 50%;
+    --my: 50%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-void text-slate-300 font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display text-white;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: rgba(56, 189, 248, 0.28);
+    color: #fff;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #05080f;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #1b2547, #38bdf8);
+    border-radius: 999px;
+    border: 2px solid #05080f;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #38bdf8, #818cf8);
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.28em] text-sky-400/90;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-sky-300 via-cyan-200 to-violet-300 bg-clip-text text-transparent;
+  }
+
+  .gradient-text-animated {
+    background-image: linear-gradient(
+      110deg,
+      #7dd3fc,
+      #22d3ee,
+      #a5b4fc,
+      #22d3ee,
+      #7dd3fc
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    @apply animate-shimmer;
+  }
+
+  .glass {
+    @apply rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-strong {
+    @apply rounded-2xl border border-white/10 bg-panel/70 backdrop-blur-xl;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06), 0 20px 60px -30px rgba(0, 0, 0, 0.8);
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-slate-300 transition-colors duration-300;
+  }
+
+  .chip:hover {
+    @apply border-sky-400/40 bg-sky-400/10 text-sky-200;
+  }
+
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-void transition-transform duration-200;
+    background: linear-gradient(110deg, #7dd3fc, #38bdf8 45%, #818cf8);
+    box-shadow: 0 10px 40px -12px rgba(56, 189, 248, 0.7);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 14px 50px -10px rgba(56, 189, 248, 0.9);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.02] px-6 py-3 text-sm font-semibold text-slate-200 transition-colors duration-200;
+  }
+  .btn-ghost:hover {
+    @apply border-sky-400/40 bg-sky-400/[0.06] text-white;
+  }
+
+  .link-muted {
+    @apply text-slate-400 transition-colors duration-200 hover:text-sky-300;
+  }
+
+  .card-hairline {
+    @apply rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.04] to-white/[0.01];
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* dotted/lined grid background */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(56, 189, 248, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56, 189, 248, 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  }
+
+  .spotlight {
+    background: radial-gradient(
+      600px circle at var(--mx) var(--my),
+      rgba(56, 189, 248, 0.10),
+      transparent 40%
+    );
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
