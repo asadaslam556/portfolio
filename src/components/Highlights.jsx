@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import Section from './Section'
 import SpotlightCard from './SpotlightCard'
@@ -112,8 +113,9 @@ export default function Highlights() {
         </div>
       </div>
 
-      {/* lightbox: shows photos of the OPEN event only */}
-      <AnimatePresence>
+      {/* lightbox rendered on document.body so the section's 3D transform can't offset it */}
+      {createPortal(
+        <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -175,7 +177,9 @@ export default function Highlights() {
             )}
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>,
+        document.body
+      )}
     </Section>
   )
 }
