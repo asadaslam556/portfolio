@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import MagneticButton from './MagneticButton'
 import Icon from './Icons'
@@ -7,6 +7,20 @@ import { profile } from '../data/content'
 // Heavy 3D scene (three.js) is code-split so page content paints first,
 // then the canvas streams in. Keeps mobile from stalling on first load.
 const KnowledgeGraph = lazy(() => import('../three/KnowledgeGraph'))
+
+// On phones we skip the live 3D canvas entirely and show a static glow
+// instead, so the page loads instantly. Desktop keeps the full animation.
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px) and (pointer: fine)')
+    const update = () => setIsDesktop(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+  return isDesktop
+}
 
 const container = {
   hidden: {},
@@ -19,15 +33,21 @@ const item = {
 
 export default function Hero({ ready }) {
   const reduced = useReducedMotion()
+  const isDesktop = useIsDesktop()
 
   return (
     <section id="home" className="relative flex min-h-[100svh] items-center overflow-hidden">
-      {/* 3D layer */}
+      {/* 3D layer (desktop) or static glow (mobile) */}
       <div className="absolute inset-0">
-        {ready && (
+        {ready && isDesktop ? (
           <Suspense fallback={null}>
             <KnowledgeGraph reducedMotion={!!reduced} />
           </Suspense>
+        ) : (
+          <div className="absolute inset-0 grid-bg">
+            <div className="absolute left-1/2 top-1/3 h-72 w-72 -translate-x-1/2 rounded-full bg-sky-500/20 blur-[120px]" />
+            <div className="absolute right-1/4 top-1/2 h-64 w-64 rounded-full bg-violet-500/20 blur-[120px]" />
+          </div>
         )}
         {/* fade the canvas into the page at the bottom */}
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-void to-transparent" />
