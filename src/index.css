@@ -51,6 +51,13 @@
     @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
   }
 
+  /* On very large screens, let content use a bit more width */
+  @media (min-width: 1920px) {
+    .container-x {
+      max-width: 80rem;
+    }
+  }
+
   .eyebrow {
     @apply font-mono text-xs uppercase tracking-[0.28em] text-sky-400/90;
   }

@@ -21,7 +21,7 @@ export default function Hero({ ready }) {
   const reduced = useReducedMotion()
 
   return (
-    <section id="home" className="relative flex min-h-[100svh] items-center overflow-hidden">
+    <section id="home" className="relative flex min-h-[100svh] items-center overflow-hidden md:py-24">
       {/* 3D layer */}
       <div className="absolute inset-0">
         {ready && (
