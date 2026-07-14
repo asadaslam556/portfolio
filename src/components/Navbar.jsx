@@ -74,12 +74,13 @@ export default function Navbar() {
 
         <div className="flex items-center gap-2">
           <a
-            href={profile.cv}
-            download
+            href={profile.linkedin}
+            target="_blank"
+            rel="noreferrer"
             className="hidden items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-medium text-slate-200 transition-colors hover:border-sky-400/40 hover:text-white sm:inline-flex"
           >
-            <Icon name="download" className="h-4 w-4" />
-            CV
+            <Icon name="linkedin" className="h-4 w-4" />
+            LinkedIn
           </a>
           <button
             onClick={() => setOpen((v) => !v)}
@@ -116,14 +117,13 @@ export default function Navbar() {
               ))}
               <li>
                 <a
-                  href={profile.cv}
-                  download
-                  onClick={() => setOpen(false)}
-                  className="mt-2 flex items-center gap-2 rounded-xl bg-sky-400/10 px-4 py-3 text-base font-medium text-sky-200"
-                >
-                  <Icon name="download" className="h-5 w-5" />
-                  Download CV
-                </a>
+                href="#contact"
+                onClick={() => setOpen(false)}
+                className="mt-2 flex items-center gap-2 rounded-xl bg-sky-400/10 px-4 py-3 text-base font-medium text-sky-200"
+              >
+                <Icon name="mail" className="h-5 w-5" />
+                Get in Touch
+              </a>
               </li>
             </ul>
           </motion.div>

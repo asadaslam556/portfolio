@@ -8,12 +8,10 @@ export const profile = {
     'I build production ETL/ELT pipelines and ship Gen AI systems that people use every day.',
   location: 'Nürnberg, Germany',
   email: 'asadaslam556@gmail.com',
-  phone: '+49 176 71631580',
   linkedin: 'https://www.linkedin.com/in/asadaslam556/',
   github: 'https://github.com/asadaslam556',
  // Toggles the GitHub links in the nav, hero, and footer on or off.
   showGithub: false,
-  cv: '/Asad_Aslam_CV.pdf',
   portrait: '/images/profile.jpg', // square image works best
 
   // Web3Forms key that delivers the contact form to my inbox (safe to be public).
@@ -144,17 +142,17 @@ export const projects = [
     tags: ['Mendix', 'Low-Code', 'Risk Modeling', 'Process Automation'],
   },
   {
-    title: 'Job Application Automation Pipeline',
-    org: 'Personal Project',
-    period: 'May 2026 - Present',
-    category: 'AI & LLM',
-    featured: false,
-    description:
-      'A Python pipeline that aggregates roles from multiple job-board APIs, scores each listing against my profile with an LLM, and generates tailored CVs and cover letters.',
-    detail:
-      'Pulls listings from job-board APIs (JSearch, Jooble), ranks them by fit using the Claude API, and auto-generates tailored application documents from templates. Integrates Gmail (OAuth) for status tracking, with bulk scoring routed through a smaller, lower-cost model tier. Built as modular, configurable Python scripts.',
-    impact: 'End-to-end automated',
-    tags: ['Python', 'Claude API', 'Gmail API', 'Automation', 'LLM'],
+  title: 'Job Matching & Ranking Pipeline',
+  org: 'Personal Project',
+  period: 'May 2026 - Present',
+  category: 'AI & LLM',
+  featured: false,
+  description:
+    'A Python pipeline that aggregates roles from six job-board and ATS APIs, normalizes their inconsistent schemas into a single model, and ranks every posting for relevance using an LLM.',
+  detail:
+    'Pulls from Adzuna, Arbeitnow, the Bundesagentur für Arbeit, Jooble, JSearch, and direct ATS boards. Scoring runs on a cheap model tier behind a content-hash cache keyed on profile plus job description, so a listing that reappears on a second board costs nothing to re-score. State is an append-only JSONL event log, which makes every run replayable. Gmail is integrated over OAuth for status tracking.',
+  impact: '1,200+ job descriptions scored weekly',
+  tags: ['Python', 'Claude API', 'Event Sourcing', 'Caching', 'Gmail API', 'OAuth', 'Prompt Engineering'],
   },
   {
     title: 'P05: Data Attribution for Environmental Monitoring',
@@ -297,11 +295,21 @@ export const gallery = [
     ],
   },
   {
-    title: 'Data, Analytics & AI Conference, Nuremberg',
+    title: '9th Data, Analytics & AI Conference 2025, Nuremberg',
     images: [
       '/images/gallery/daai-1.jpg',
       '/images/gallery/daai-2.jpg',
       '/images/gallery/daai-3.jpg',
+    ],
+  },
+  {
+    title: '10th Data, Analytics & AI Conference 2026, Nuremberg',
+    images: [
+      '/images/gallery/daai26-4.jpg',
+      '/images/gallery/daai26-5.jpg',
+      '/images/gallery/daai26-1.jpg',
+      '/images/gallery/daai26-2.jpg',
+      '/images/gallery/daai26-3.jpg',
     ],
   },
   {

@@ -80,9 +80,9 @@ export default function Hero({ ready }) {
             View Projects
             <Icon name="arrowRight" className="h-4 w-4" />
           </MagneticButton>
-          <MagneticButton href={profile.cv} className="btn-ghost" intensity={6} download>
-            <Icon name="download" className="h-4 w-4" />
-            Download CV
+          <MagneticButton href="#contact" className="btn-ghost" intensity={6}>
+            <Icon name="mail" className="h-4 w-4" />
+            Get in Touch
           </MagneticButton>
         </motion.div>
 

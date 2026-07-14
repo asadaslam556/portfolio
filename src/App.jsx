@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { MotionConfig } from 'framer-motion'
 import Preloader from './components/Preloader'
-import CustomCursor from './components/CustomCursor'
 import BackgroundFX from './components/BackgroundFX'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -21,7 +20,6 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <Preloader onDone={() => setReady(true)} />
-      <CustomCursor />
       <BackgroundFX />
 
       <div className="relative min-h-screen overflow-x-clip">

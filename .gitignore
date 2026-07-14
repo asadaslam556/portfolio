@@ -28,3 +28,12 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+
+# never commit CVs or documents to a public repo
+*.pdf
+*.docx
+
+# windows os junk
+Thumbs.db
+desktop.ini
